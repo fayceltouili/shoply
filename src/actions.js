@@ -1,9 +1,9 @@
 import { ADD, REMOVE } from "./actionTypes";
 
-export function add(item) {
+export function add(id) {
   return {
     type: ADD,
-    item
+    id
   };
 }
 

@@ -2,36 +2,33 @@ import React, {Component} from 'react';
 import { connect } from "react-redux";
 import {add, remove} from  "./actions";
 import { Link } from "react-router-dom";
-import './App.css';
-import Item from './ProductDetails';
+import './ProducstList.css';
 
 class ProductList extends Component{
-  constructor(props){
-    super(props);
-    this.addItem = this.addItem.bind(this);
-    this.removeItem = this.removeItem.bind(this)
-  }
-  addItem(item){ this.props.add(item)}
-  removeItem(id){ this.props.remove(id)}
+
 
   render(){
-    console.log('cart..',this.props.cart)
     const products = this.props.products;
-    return(
-			Object.entries(products).map(item => (
-				<div className="col-3 text-center" key={item[0]}>
-					<Link to={`/Products/${item[0]}`}>
+    console.log(this.props)
+			const productsCard = Object.keys(products).map(id => {
+				const product = products[id];
+				return(
+				<div className="mb-2 mr-sm-2 mb-sm-0">
+					<Link to={`/Products/${id}`}>
 					<h3 className="mt-3">
-						{item[1].name}
+						{product.name}
 					</h3>
-					<img src={item[1].image_url} alt={item[1].name} />
+					<img src={product.image_url} alt={product.name} />
 					</Link>
+					<hr></hr>
 				</div>
-			))
-		);
-		
-		
-
+				)
+			})
+			return(
+				<div inline>
+				{productsCard}
+				</div>
+			)
   }
 }
 function mapStateToProps(state) {
